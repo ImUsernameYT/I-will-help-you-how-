@@ -1,0 +1,25 @@
+my code script for player exsample
+local Players = game:GetService("Players") -- game.Players is OK here, too
+ 
+-- Eventually, this function will be called once for all Player objects
+local function onPlayerAdded(player)
+	-- Create a container for leaderstats
+	local leaderstats = Instance.new("Folder")
+	leaderstats.Name = "leaderstats"
+	
+	-- Create one leaderstat value
+	local vScore = Instance.new("IntValue")
+	vScore.Name = "Score"
+	vScore.Value = 0
+	vScore.Parent = leaderstats
+	
+	-- Add to player (displaying it)
+	leaderstats.Parent = player
+end
+ 
+-- Process Player objects that have already joined the game
+for _, player in pairs(Players:GetPlayers()) do
+	onPlayerAdded(player)
+end
+-- Process Player objects that are being added to the game
+Players.PlayerAdded:Connect(onPlayerAdded) -- Note: PlayerAdded not ChildAdded here!
